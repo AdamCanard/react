@@ -1,0 +1,69 @@
+html,
+body {
+  margin: 0;
+}
+
+.main {
+  height: 500px;
+  width: 500px;
+}
+
+.movement {
+  display: grid;
+  border: 2px black solid;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 50% 50%;
+}
+
+.up {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.down {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.block {
+  height: 50px;
+  width: 50px;
+}
+
+/* .main {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template-columns: 15% 40% 40%;
+  grid-template-rows: 15% 80%;
+  grid-template-areas:
+    "header header header"
+    "side data data";
+} */
+
+/* .header {
+  grid-area: header;
+  background-color: black;
+}
+
+.side {
+  grid-area: side;
+  background-color: green;
+}
+
+.data {
+  grid-area: data;
+  background-color: blue;
+} */
