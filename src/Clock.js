@@ -98,6 +98,7 @@ export default function Clock({ height, width }) {
         <div style={hourStyle}>{hourStr}</div>
         <div style={minuteStyle}>{minuteStr}</div>
         <div style={secondStyle}>{secondStr}</div>
+        <div style={{border:"8px solid black",width:"0px",left:"48%",borderRadius:"8px",position:"absolute"}}></div>
       </div>
     </div>
   );
