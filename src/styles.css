@@ -1,41 +1,23 @@
 html,
 body {
+  height: 100%;
+  width: 100%;
   margin: 0;
 }
 
 .main {
-  height: 500px;
-  width: 500px;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
 }
 
-.movement {
-  display: grid;
-  border: 2px black solid;
-  height: 100%;
-  width: 100%;
-  grid-template-columns: 33% 33% 33%;
-  grid-template-rows: 50% 50%;
-}
-
-.up {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.down {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-.left {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.right {
-  grid-column: 3;
-  grid-row: 2;
-}
+/* .Clock {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  justify-content: center;
+  transform: rotate(30deg);
+} */
 
 .block {
   height: 50px;

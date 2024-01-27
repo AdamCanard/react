@@ -1,20 +1,58 @@
 import "./styles.css";
-import Player from "./Player.js";
-import ImageRef from "./ImageRef.js";
-import photo from "./Temp.png";
-import Grid from "./Grid.js";
+import { useState, useCallback, useEffect } from "react";
+
+import Clock from "./Clock";
+import Taskbar from "./Taskbar";
+import Grid from "./Grid";
+
+const flexStyleCenter = {
+  display: "flex",
+  width: "100vw",
+  height: "100vh",
+  flexDirection: "column",
+  placeContent: "center",
+  textAlign: "center",
+  alignItems: "center",
+  position: "relative",
+};
 
 function App() {
   return (
-    <>
-      <div className="main">
-        <Grid col={1} row={3} height={500} width={500}>
-          <ImageRef src={photo} alt="image1" />
-          <ImageRef src={photo} alt="image2" />
-          <ImageRef src={photo} alt="image3" />
-        </Grid>
-      </div>
-    </>
+    <div style={flexStyleCenter}>
+      <Screen />
+    </div>
   );
 }
 export default App;
+
+function Screen() {
+  const screenStyle = {
+    display: "grid",
+    width: "100vw",
+    height: "100vh",
+    gridTemplateColumns: "100%",
+    backgroundColor: "#FF784F",
+    justifyContent: "space-evenly",
+    textAlign: "center",
+    alignItems: "center",
+  };
+  const midCol = {
+    display: "grid",
+    width: "100%",
+    height: "100%",
+    gridTemplateColumns: "100%",
+    gridTemplateRows: "15% 85%",
+    justifyContent: "space-evenly",
+    textAlign: "center",
+    alignItems: "center",
+  };
+
+  return (
+    <div style={screenStyle}>
+      <div className="midCol" style={midCol}>
+        <Clock />
+        <Taskbar />
+      </div>
+    </div>
+  );
+}
