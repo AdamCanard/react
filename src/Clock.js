@@ -24,7 +24,7 @@ export default function Clock({ height, width }) {
     maxWidth: "100px",
     overflow: "hidden",
     whiteSpace: "nowrap",
-    transition: "1s",
+    transition: (hourAng===0)?"none":"1s",
   };
   const minuteStyle = {
     display: "inline-block",
@@ -38,7 +38,8 @@ export default function Clock({ height, width }) {
     maxWidth: "140px",
     overflow: "hidden",
     whiteSpace: "nowrap",
-    transition: "1s",
+    transition: (minuteAng===0)?"none":"1s",
+
   };
   const secondStyle = {
     display: "inline-block",
@@ -52,7 +53,7 @@ export default function Clock({ height, width }) {
     maxWidth: "180px",
     overflow: "hidden",
     whiteSpace: "nowrap",
-    transition: "1s",
+    transition: (secondAng===0)?"none":"1s",
   };
 
   function useTime() {
