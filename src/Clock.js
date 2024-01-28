@@ -24,7 +24,7 @@ export default function Clock({ height, width }) {
     maxWidth: "100px",
     overflow: "hidden",
     whiteSpace: "nowrap",
-    transition: "1s",
+    transition: hourAng === 0 ? "none" : "1s",
   };
   const minuteStyle = {
     display: "inline-block",
@@ -38,7 +38,7 @@ export default function Clock({ height, width }) {
     maxWidth: "140px",
     overflow: "hidden",
     whiteSpace: "nowrap",
-    transition: "1s",
+    transition: minuteAng === 0 ? "none" : "1s",
   };
   const secondStyle = {
     display: "inline-block",
@@ -52,7 +52,7 @@ export default function Clock({ height, width }) {
     maxWidth: "180px",
     overflow: "hidden",
     whiteSpace: "nowrap",
-    transition: "1s",
+    transition: secondAng === 0 ? "none" : "1s",
   };
 
   function useTime() {
@@ -80,7 +80,7 @@ export default function Clock({ height, width }) {
         border: "4px solid black",
         height: "400px",
         width: "400px",
-        position: "absolute",
+
         backgroundColor: "white",
       }}
     >
@@ -88,7 +88,6 @@ export default function Clock({ height, width }) {
         className="here"
         style={{
           position: "relative",
-
           placeContent: "center",
           textAlign: "center",
           paddingTop: "200px",
@@ -97,6 +96,15 @@ export default function Clock({ height, width }) {
         <div style={hourStyle}>{hourStr}</div>
         <div style={minuteStyle}>{minuteStr}</div>
         <div style={secondStyle}>{secondStr}</div>
+        <div
+          style={{
+            border: "4px solid black",
+            width: "0px",
+            left: "49%",
+            borderRadius: "4px",
+            position: "absolute",
+          }}
+        ></div>
       </div>
     </div>
   );
