@@ -1,9 +1,15 @@
 import { useState } from "react";
 import logo from "./Computer-icon.png";
 
-export default function Taskbar() {
-  const [color, setColor] = useState("#FFEDC2");
-  const style = {
+export default function Taskbar({
+  changeColor,
+  clockOn,
+  switchMode,
+  dev,
+  pass,
+  color,
+}) {
+  const TaskbarStyle = {
     display: "grid",
     gridTemplateColumns: "50% 50%",
     width: "100%",
@@ -14,27 +20,35 @@ export default function Taskbar() {
     borderRadius: 50,
   };
 
-  function changeButton1() {
-    if (color === "#FFEDC2") {
-      setColor("#A6D274");
-    } else {
-      setColor("#FFEDC2");
-    }
-  }
+  const SidebarStyle = {
+    display: "flex",
+    flexDirection: "column",
+    width: "20%",
+    height: "95%",
+    gridRow: 1,
+    justifyContent: "flex-start",
+    backgroundColor: "#3A3042",
+    outline: "2px black solid",
+    marginLeft: "5px",
+    borderRadius: 50,
+  };
+
   return (
-    <div className="temp " style={style}>
-      <Title title="Adam's Website" src={logo} />
-      <ButtonRow
-        button1={() => changeButton1()}
-        button2={() => console.log("button2")}
-        button3={() => alert("button3")}
+    <div className="temp " style={pass ? SidebarStyle : TaskbarStyle}>
+      <Title title="Adam's Website" src={logo} pass={pass} />
+      <ButtonGroup
+        button1={changeColor}
+        button2={clockOn}
+        button3={dev}
+        button4={switchMode}
         color={color}
+        pass={pass}
       />
     </div>
   );
 }
 
-function Title({ title, src }) {
+function Title({ title, src, pass }) {
   const imageStyle = {
     height: "60px",
     width: "60px",
@@ -50,9 +64,9 @@ function Title({ title, src }) {
 
   const divStyle = {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: pass ? "column" : "row",
     width: "100%",
-    height: "100%",
+    height: pass ? "35%" : "100%",
     alignItems: "center",
   };
   return (
@@ -63,13 +77,14 @@ function Title({ title, src }) {
   );
 }
 
-function ButtonRow({ button1, button2, button3, color }) {
+function ButtonGroup({ button1, button2, button3, button4, color, pass }) {
   const divStyle = {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: pass ? "column" : "row",
     height: "100%",
     width: "100%",
-    justifyContent: "space-Evenly",
+    justifyContent: pass ? "start" : "space-Evenly",
+    columnGap: pass ? "10px" : "",
   };
 
   const buttonStyle = {
@@ -79,6 +94,7 @@ function ButtonRow({ button1, button2, button3, color }) {
     fontSize: "1.5em",
     fontWeight: "700",
     color: color,
+    paddingTop: "10px",
   };
   return (
     <div style={divStyle}>
@@ -86,10 +102,13 @@ function ButtonRow({ button1, button2, button3, color }) {
         Button1
       </button>
       <button onClick={button2} style={buttonStyle}>
-        Button2
+        Clock
       </button>
       <button onClick={button3} style={buttonStyle}>
-        Button3
+        Dev
+      </button>
+      <button onClick={button4} style={buttonStyle}>
+        Mode
       </button>
     </div>
   );
