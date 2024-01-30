@@ -29,9 +29,7 @@ export default App;
 function Screen() {
   const [gamer, setGamer] = useState(false);
   const [color, setColor] = useState("#FFEDC2");
-  const [clock, setClock] = useState(false);
-  const [dev, setDev] = useState(true);
-  const compList = [clock, dev];
+  const [current, setCurrent] = useState("dev");
 
   const screenStyle = {
     display: "grid",
@@ -75,10 +73,10 @@ function Screen() {
   }
 
   function compClock() {
-    setClock(!clock);
+    setCurrent("clock");
   }
   function compDev() {
-    setDev(!dev);
+    setCurrent("dev");
   }
 
   return (
@@ -93,8 +91,8 @@ function Screen() {
           color={color}
         />
         <div style={flexStyleCenter}>
-          {clock ? <Clock /> : <></>}
-          {dev ? <Dev /> : <></>}
+          {current == "clock" ? <Clock /> : <></>}
+          {current == "dev" ? <Dev /> : <></>}
         </div>
       </div>
     </div>
