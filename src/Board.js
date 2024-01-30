@@ -45,9 +45,6 @@ export default function Board({ row, col, bombs }) {
     }
     for (let i = 0; i < row; i++) {
       for (let j = 0; j < col; j++) {
-        console.log(newGrid);
-        console.log(i);
-        console.log(j);
         if (newGrid[i][j] == "B") {
         } else {
           newGrid[i][j] = countBombs(newGrid, i, j);
@@ -70,6 +67,7 @@ export default function Board({ row, col, bombs }) {
         />
       ))
     );
+    console.log(grid);
     setRenderedGrid(newGrid);
   };
 
@@ -122,14 +120,13 @@ export default function Board({ row, col, bombs }) {
     renderGrid();
   }
 
-  function Reset() {
-    setGrid(
-      Array(row)
-        .fill()
-        .map(() => new Array(col).fill(0))
-    );
+  const boardReset = () => {
+    const newGrid = Array(row)
+      .fill()
+      .map(() => new Array(col).fill(0));
+    setGrid(newGrid);
     renderGrid();
-  }
+  };
 
   return (
     <>
@@ -145,7 +142,7 @@ export default function Board({ row, col, bombs }) {
         <button style={{ width: "50%", height: "100%" }} onClick={Update}>
           Generate Board
         </button>
-        <button style={{ width: "50%", height: "100%" }} onClick={Reset}>
+        <button style={{ width: "50%", height: "100%" }} onClick={boardReset}>
           Reset Board
         </button>
       </div>
