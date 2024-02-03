@@ -35,7 +35,7 @@ export default function Clock({ height, width }) {
     textAlign: "left",
     lineHeight: "1",
     transformOrigin: "left",
-    maxWidth: "140px",
+    maxWidth: "135px",
     overflow: "hidden",
     whiteSpace: "nowrap",
     transition: minuteAng === 0 ? "none" : "1s",
@@ -90,7 +90,7 @@ export default function Clock({ height, width }) {
           position: "relative",
           placeContent: "center",
           textAlign: "center",
-          paddingTop: "200px",
+          paddingTop: "180px",
         }}
       >
         <div style={hourStyle}>{hourStr}</div>

@@ -3,6 +3,7 @@ import { useState, useCallback, useEffect } from "react";
 
 import Clock from "./Clock";
 import Taskbar from "./Taskbar";
+import Homepage from "./Homepage";
 
 import Dev from "./Dev";
 
@@ -28,7 +29,6 @@ export default App;
 
 function Screen() {
   const [gamer, setGamer] = useState(false);
-  const [color, setColor] = useState("#FFEDC2");
   const [current, setCurrent] = useState("dev");
 
   const screenStyle = {
@@ -41,6 +41,7 @@ function Screen() {
     textAlign: "center",
     alignItems: "center",
   };
+
   const midCol = {
     display: "grid",
     width: "100%",
@@ -64,12 +65,8 @@ function Screen() {
   function switchMode() {
     setGamer(!gamer);
   }
-  function changeColor() {
-    if (color === "#FFEDC2") {
-      setColor("#A6D274");
-    } else {
-      setColor("#FFEDC2");
-    }
+  function compHomepage() {
+    setCurrent("homepage");
   }
 
   function compClock() {
@@ -83,16 +80,17 @@ function Screen() {
     <div style={screenStyle}>
       <div className="midCol" style={gamer ? gamerMode : midCol}>
         <Taskbar
-          changeColor={changeColor}
+          homePage={compHomepage}
           clockOn={compClock}
           switchMode={switchMode}
           dev={compDev}
           pass={gamer}
-          color={color}
+          color={"#FFEDC2"}
         />
         <div style={flexStyleCenter}>
           {current == "clock" ? <Clock /> : <></>}
           {current == "dev" ? <Dev /> : <></>}
+          {current == "homepage" ? <Homepage /> : <></>}
         </div>
       </div>
     </div>

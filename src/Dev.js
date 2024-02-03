@@ -12,5 +12,5 @@ export default function Dev() {
 }
 
 function Minesweeper() {
-  return <Board row={5} col={5} bombs={5} />;
+  return <Board maxRow={10} maxCol={10} bombs={10} />;
 }

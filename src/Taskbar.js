@@ -2,7 +2,7 @@ import { useState } from "react";
 import logo from "./Computer-icon.png";
 
 export default function Taskbar({
-  changeColor,
+  homePage,
   clockOn,
   switchMode,
   dev,
@@ -37,7 +37,7 @@ export default function Taskbar({
     <div className="temp " style={pass ? SidebarStyle : TaskbarStyle}>
       <Title title="Adam's Website" src={logo} pass={pass} />
       <ButtonGroup
-        button1={changeColor}
+        button1={homePage}
         button2={clockOn}
         button3={dev}
         button4={switchMode}
@@ -99,7 +99,7 @@ function ButtonGroup({ button1, button2, button3, button4, color, pass }) {
   return (
     <div style={divStyle}>
       <button onClick={button1} style={buttonStyle}>
-        Button1
+        Home Page
       </button>
       <button onClick={button2} style={buttonStyle}>
         Clock
