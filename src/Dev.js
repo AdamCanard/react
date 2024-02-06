@@ -1,16 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
 import Gameloop from "./WIP/Gameloop";
 import Board from "./Board";
+import Minesweeper from "./Minesweeper";
 
 export default function Dev() {
   return (
     // <Gameloop />
     <>
-      <Minesweeper />
+      <Minesweeper height={500} width={500} />
     </>
   );
-}
-
-function Minesweeper() {
-  return <Board maxRow={10} maxCol={10} bombs={10} />;
 }

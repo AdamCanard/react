@@ -21,7 +21,7 @@ export default function Clock({ height, width }) {
     textAlign: "left",
     lineHeight: "1",
     transformOrigin: "left",
-    maxWidth: "100px",
+    maxWidth: height / 4 + "px",
     overflow: "hidden",
     whiteSpace: "nowrap",
     transition: hourAng === 0 ? "none" : "1s",
@@ -35,7 +35,7 @@ export default function Clock({ height, width }) {
     textAlign: "left",
     lineHeight: "1",
     transformOrigin: "left",
-    maxWidth: "135px",
+    maxWidth: height / 3 + "px",
     overflow: "hidden",
     whiteSpace: "nowrap",
     transition: minuteAng === 0 ? "none" : "1s",
@@ -49,7 +49,7 @@ export default function Clock({ height, width }) {
     justifyContent: "center",
     textAlign: "left",
     lineHeight: "1",
-    maxWidth: "180px",
+    maxWidth: height / 2.15 + "px",
     overflow: "hidden",
     whiteSpace: "nowrap",
     transition: secondAng === 0 ? "none" : "1s",
@@ -78,8 +78,8 @@ export default function Clock({ height, width }) {
       style={{
         borderRadius: "100%",
         border: "4px solid black",
-        height: "400px",
-        width: "400px",
+        height: height,
+        width: width,
 
         backgroundColor: "white",
       }}
@@ -90,7 +90,7 @@ export default function Clock({ height, width }) {
           position: "relative",
           placeContent: "center",
           textAlign: "center",
-          paddingTop: "180px",
+          paddingTop: height / 2.15 + "px",
         }}
       >
         <div style={hourStyle}>{hourStr}</div>
@@ -98,10 +98,10 @@ export default function Clock({ height, width }) {
         <div style={secondStyle}>{secondStr}</div>
         <div
           style={{
-            border: "4px solid black",
+            border: "6px solid black",
             width: "0px",
-            left: "49%",
-            borderRadius: "4px",
+            left: "48%",
+            borderRadius: "6px",
             position: "absolute",
           }}
         ></div>
