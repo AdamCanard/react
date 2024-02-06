@@ -88,6 +88,7 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
 
   const [grid, setGrid] = useState(boardGen);
   const [highlight, setHighlight] = useState(false);
+  const [lose, setLose] = useState(false);
 
   function openAllZero(row, col) {
     const temp = Array(maxRow)
@@ -100,8 +101,6 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
       temp[row][col].objState = "show";
     }
 
-    //check if corners of zeros
-
     if (col != maxCol - 1) {
       if (temp[row][col + 1].objVal === 0) {
         openAllZero(row, col + 1);
@@ -111,9 +110,13 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
         }
       }
       if (row != maxRow - 1) {
-        if (temp[row + 1][col + 1].objVal === 0) {
-          openAllZero(row + 1, col + 1);
-        } else if (temp[row + 1][col + 1].objVal != "B") {
+        // if (temp[row + 1][col + 1].objVal === 0) {
+        //   openAllZero(row + 1, col + 1);
+        // } else
+        if (
+          temp[row + 1][col + 1].objVal != "B" &&
+          temp[row + 1][col + 1].objVal != 0
+        ) {
           if (temp[row + 1][col + 1].objState != "flagged") {
             temp[row + 1][col + 1].objState = "show";
           }
@@ -130,9 +133,13 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
         }
       }
       if (row != 0) {
-        if (temp[row - 1][col - 1].objVal === 0) {
-          openAllZero(row - 1, col - 1);
-        } else if (temp[row - 1][col - 1].objVal != "B") {
+        // if (temp[row - 1][col - 1].objVal === 0) {
+        //   openAllZero(row - 1, col - 1);
+        // } else
+        if (
+          temp[row - 1][col - 1].objVal != "B" &&
+          temp[row - 1][col - 1].objVal != 0
+        ) {
           if (temp[row - 1][col - 1].objState != "flagged") {
             temp[row - 1][col - 1].objState = "show";
           }
@@ -149,9 +156,13 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
         }
       }
       if (col != 0) {
-        if (temp[row + 1][col - 1].objVal === 0) {
-          openAllZero(row + 1, col) - 1;
-        } else if (temp[row + 1][col - 1].objVal != "B") {
+        // if (temp[row + 1][col - 1].objVal === 0) {
+        //   openAllZero(row + 1, col - 1);
+        // } else
+        if (
+          temp[row + 1][col - 1].objVal != "B" &&
+          temp[row + 1][col - 1].objVal != 0
+        ) {
           if (temp[row + 1][col - 1].objState != "flagged") {
             temp[row + 1][col - 1].objState = "show";
           }
@@ -168,9 +179,13 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
         }
       }
       if (col != maxCol - 1) {
-        if (temp[row - 1][col + 1].objVal === 0) {
-          openAllZero(row - 1, col + 1);
-        } else if (temp[row - 1][col + 1].objVal != "B") {
+        // if (temp[row - 1][col + 1].objVal === 0) {
+        //   openAllZero(row - 1, col + 1);
+        // } else
+        if (
+          temp[row - 1][col + 1].objVal != "B" &&
+          temp[row - 1][col + 1].objVal != 0
+        ) {
           if (temp[row - 1][col + 1].objState != "flagged") {
             temp[row - 1][col + 1].objState = "show";
           }
@@ -226,7 +241,11 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
     if (temp[row][col].objVal === 0) {
       openAllZero(row, col);
     } else if (temp[row][col].objState === "closed") {
-      temp[row][col].objState = "show";
+      if (temp[row][col].objVal === "B") {
+        setLose(true);
+      } else {
+        temp[row][col].objState = "show";
+      }
     }
 
     setGrid(temp);
@@ -388,6 +407,11 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
     if (highlight) {
       removeHighlights();
       setHighlight(false);
+    }
+    if (lose) {
+      alert("you Lose");
+      boardReset();
+      setLose(false);
     }
   }, [grid]);
 
