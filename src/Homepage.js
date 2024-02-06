@@ -2,7 +2,7 @@ import Clock from "./Clock";
 import Minesweeper from "./Minesweeper";
 
 const clockPara = `I made this clock to practice using hooks, specifically useState and useInterval. 
-  I was inspired to make this clock from a mock-up I saw oninstagram and i wanted to try and recreate it.
+  I was inspired to make this clock from a mock-up I saw on instagram and i wanted to try and recreate it.
   \n
   Left to do is Style it better and replace the sizing with rem instead of px`;
 
@@ -13,18 +13,24 @@ Im really happy with the logic, i am not so happy with all the redundant if stat
 \n
 Left to do is styling on the parent component to make it look like minesweeper, I want to render the flag or click on win and loss before running the alert and maybe find a better way to highlight blocks`;
 
+const postPara = `I am making the homepage / post system to keep a ledger of the things im working on, this post is specific is to see how the scroll it.
+I want to make everyother post to be in the reverse direction, I want to move all the paragraphs to a data file.
+This is the start of css monthlys, I'm only going to work on styles at the start of each month
+`;
+
 export default function Homepage() {
   return (
     <>
-      <Post
-        name={"Clock"}
-        comp={<Clock height={250} width={250} />}
-        para={clockPara}
-      />
+      <Post name={"Post"} comp={""} para={postPara} />
       <Post
         name={"MineSweeper"}
         comp={<Minesweeper height={250} width={250} />}
         para={minePara}
+      />
+      <Post
+        name={"Clock"}
+        comp={<Clock height={250} width={250} />}
+        para={clockPara}
       />
     </>
   );
@@ -33,31 +39,39 @@ export default function Homepage() {
 function Post({ name, comp, para }) {
   return (
     <div
+      className="PostDiv"
       style={{
         display: "flex",
         flexDirection: "row",
-        width: "70rem",
-        height: "15rem",
-        border: "2px solid black",
+        width: "72rem",
+        height: "16rem",
         alignItems: "center",
-        justifyContent: "space-around",
+        justifyContent: "space-evenly",
         marginBottom: "1rem",
+        background:
+          "radial-gradient(crimson, skyblue), linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255, 1) 90%)",
+
+        rowGap: "1rem",
       }}
     >
       <div
+        className="ComponantDiv"
         style={{
-          width: "17.5rem",
-          height: "100%",
+          display: "flex",
+          width: "16rem",
+          height: "16rem",
+          justifyContent: "center",
         }}
       >
         {comp}
       </div>
       <div
+        className="TextDiv"
         style={{
           display: "flex",
           flexDirection: "column",
-          width: "100%",
-          height: "100%",
+          width: "56rem",
+          height: "16rem",
           border: "2px solid black",
           textAlign: "left",
           gap: "10px",

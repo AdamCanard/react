@@ -7,7 +7,7 @@ export default function Dev() {
   return (
     // <Gameloop />
     <>
-      <Minesweeper height={500} width={500} />
+      <Minesweeper />
     </>
   );
 }

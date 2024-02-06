@@ -5,6 +5,7 @@ export default function Taskbar({
   homePage,
   clockOn,
   switchMode,
+  minesweeper,
   dev,
   pass,
   color,
@@ -12,12 +13,13 @@ export default function Taskbar({
   const TaskbarStyle = {
     display: "grid",
     gridTemplateColumns: "50% 50%",
-    width: "100%",
+    width: "78rem",
     height: "70%",
     gridRow: 1,
     backgroundColor: "#3A3042",
     outline: "2px black solid",
     borderRadius: 50,
+    alignItems: "center",
   };
 
   const SidebarStyle = {
@@ -34,13 +36,14 @@ export default function Taskbar({
   };
 
   return (
-    <div className="temp " style={pass ? SidebarStyle : TaskbarStyle}>
+    <div className="temp" style={pass ? SidebarStyle : TaskbarStyle}>
       <Title title="Adam's Website" src={logo} pass={pass} />
       <ButtonGroup
         button1={homePage}
         button2={clockOn}
-        button3={dev}
-        button4={switchMode}
+        button3={minesweeper}
+        button4={dev}
+        button5={switchMode}
         color={color}
         pass={pass}
       />
@@ -77,7 +80,15 @@ function Title({ title, src, pass }) {
   );
 }
 
-function ButtonGroup({ button1, button2, button3, button4, color, pass }) {
+function ButtonGroup({
+  button1,
+  button2,
+  button3,
+  button4,
+  button5,
+  color,
+  pass,
+}) {
   const divStyle = {
     display: "flex",
     flexDirection: pass ? "column" : "row",
@@ -105,9 +116,12 @@ function ButtonGroup({ button1, button2, button3, button4, color, pass }) {
         Clock
       </button>
       <button onClick={button3} style={buttonStyle}>
-        Dev
+        MineSweeper
       </button>
       <button onClick={button4} style={buttonStyle}>
+        Dev
+      </button>
+      <button onClick={button5} style={buttonStyle}>
         Mode
       </button>
     </div>

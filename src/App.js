@@ -6,13 +6,13 @@ import Taskbar from "./Taskbar";
 import Homepage from "./Homepage";
 
 import Dev from "./Dev";
+import Minesweeper from "./Minesweeper";
 
 const flexStyleCenter = {
   display: "flex",
   width: "100%",
-  height: "100%",
+  height: "100vh",
   flexDirection: "column",
-  placeContent: "center",
   textAlign: "center",
   alignItems: "center",
   position: "relative",
@@ -20,7 +20,7 @@ const flexStyleCenter = {
 
 function App() {
   return (
-    <div style={flexStyleCenter}>
+    <div className="AppDiv" style={flexStyleCenter}>
       <Screen />
     </div>
   );
@@ -32,10 +32,9 @@ function Screen() {
   const [current, setCurrent] = useState("homepage");
 
   const screenStyle = {
-    display: "grid",
-    width: "100vw",
-    height: "100vh",
-    gridTemplateColumns: "100%",
+    display: "flex",
+    width: "100%",
+    height: "100%",
     backgroundColor: "#FF784F",
     justifyContent: "space-evenly",
     textAlign: "center",
@@ -48,7 +47,7 @@ function Screen() {
     height: "100%",
     gridTemplateColumns: "100%",
     gridTemplateRows: "15% 85%",
-    justifyContent: "space-evenly",
+    justifyItems: "center",
     textAlign: "center",
     alignItems: "center",
   };
@@ -72,25 +71,42 @@ function Screen() {
   function compClock() {
     setCurrent("clock");
   }
+
+  function compMinesweeper() {
+    setCurrent("minesweeper");
+  }
+
   function compDev() {
     setCurrent("dev");
   }
 
   return (
-    <div style={screenStyle}>
+    <div className="ScreenDiv" style={screenStyle}>
       <div className="midCol" style={gamer ? gamerMode : midCol}>
         <Taskbar
           homePage={compHomepage}
           clockOn={compClock}
           switchMode={switchMode}
+          minesweeper={compMinesweeper}
           dev={compDev}
           pass={gamer}
           color={"#FFEDC2"}
         />
-        <div style={flexStyleCenter}>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            height: "100%",
+            flexDirection: "column",
+            textAlign: "center",
+            alignItems: "center",
+            position: "relative",
+          }}
+        >
           {current == "clock" ? <Clock /> : <></>}
           {current == "dev" ? <Dev /> : <></>}
           {current == "homepage" ? <Homepage /> : <></>}
+          {current == "minesweeper" ? <Minesweeper /> : <></>}
         </div>
       </div>
     </div>

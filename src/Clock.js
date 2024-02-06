@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function Clock({ height, width }) {
+export default function Clock({ height = 400, width = 400 }) {
   const [hourAng, setHourAng] = useState(0);
   const [minuteAng, setMinuteAng] = useState(0);
   const [secondAng, setSecondAng] = useState(0);
