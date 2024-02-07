@@ -431,7 +431,6 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
     display: grid;
     height: ${height}px;
     width: ${width}px;
-    align-items: center;
     grid-template-columns: repeat(${maxCol}, ${width / maxCol}px);
     grid-template-rows: repeat(${maxRow}, ${height / maxRow}px);
     border-left: 4px solid #848484;
@@ -442,73 +441,99 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
 
   const BackBoardWrap = styled.section`
     display: flex;
-    height: ${height * 1.2}px;
+    flex-direction: column;
+    height: ${height + 80}px;
     width: ${width + 20}px;
-    padding-bottom: 4px;
-    justify-content: center;
-    align-items: flex-end;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 6px;
     background-color: #c6c6c6;
     border-left: 4px solid #ffffff;
     border-top: 4px solid #ffffff;
     border-right: 4px solid #808080;
     border-bottom: 4px solid #808080;
+    row-gap: 8px;
   `;
 
   return (
-    <div
-      onContextMenu={(e) => e.preventDefault()}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-      }}
-    >
+    <div onContextMenu={(e) => e.preventDefault()}>
       <BackBoardWrap>
-        <BackBoard>
-          <Timer />
-          <Smile />
-          <GridCSSWrap>
-            {Object.values(grid).map((row, index) => {
-              return Object.values(row).map((cell, col) => {
-                return (
-                  <Cell
-                    obj={cell}
-                    height={height / maxRow}
-                    width={width / maxCol}
-                    openAllZero={openAllZero}
-                    flagSquare={flagSquare}
-                    openBox={openBox}
-                    boardReset={boardReset}
-                    clearOrHighlight={clearOrHighlight}
-                    key={"row:" + index + " col:" + col}
-                  />
-                );
-              });
-            })}
-          </GridCSSWrap>
-        </BackBoard>
+        <TopRow width={width} />
+        <GridCSSWrap>
+          {Object.values(grid).map((row, index) => {
+            return Object.values(row).map((cell, col) => {
+              return (
+                <Cell
+                  obj={cell}
+                  height={height / maxRow}
+                  width={width / maxCol}
+                  openAllZero={openAllZero}
+                  flagSquare={flagSquare}
+                  openBox={openBox}
+                  boardReset={boardReset}
+                  clearOrHighlight={clearOrHighlight}
+                  key={"row:" + index + " col:" + col}
+                />
+              );
+            });
+          })}
+        </GridCSSWrap>
       </BackBoardWrap>
     </div>
   );
 }
 
-function BackBoard({ children }) {
+function TopRow({ width }) {
+  const TopRowWrap = styled.section`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: ${width}px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    justify-content: space-around;
+    background-color: #c0c0c0;
+    border-left: 4px solid #808080;
+    border-top: 4px solid #808080;
+    border-right: 4px solid #ffffff;
+    border-bottom: 4px solid #ffffff;
+  `;
+
+  const SevenSegWrap = styled.section`
+    height: 30px;
+    width: 60px;
+    background-color: black;
+    border-left: 2px solid #848484;
+    border-top: 2px solid #848484;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+  `;
   return (
     <>
-      <div className="BackBoard">{children}</div>
+      <TopRowWrap>
+        <SevenSegWrap>
+          <div className="Timer"></div>
+        </SevenSegWrap>
+
+        <Smile />
+        <SevenSegWrap>
+          <div className="Bombs"></div>
+        </SevenSegWrap>
+      </TopRowWrap>
     </>
   );
 }
 
-function Timer() {
-  return <></>;
-}
-
 function Smile() {
-  const SmileyWrap = styled.image`
+  const SmileyWrap = styled.section`
     display: flex;
     height: 30px;
     width: 30px;
+    justify-self: center;
+    border-left: 2px solid #ffffff;
+    border-top: 2px solid #ffffff;
+    border-right: 2px solid #848484;
+    border-bottom: 2px solid #848484;
   `;
 
   return (

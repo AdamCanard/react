@@ -11,11 +11,15 @@ This project helped me to structure my componants better, it also helped me lear
 It gave me a lot more practice managing state from parent and child componants. 
 Im really happy with the logic, i am not so happy with all the redundant if statements i have in my logic
 \n
-Left to do is styling on the parent component to make it look like minesweeper, I want to render the flag or click on win and loss before running the alert and maybe find a better way to highlight blocks`;
+Left to do is 
+styling to set numbers to be minesweeper photos,
+I need to implement timer and bombs, then fix the smile photo 
+I want to render the flag or click on win and loss before running the alert and maybe find a better way to highlight blocks`;
 
 const postPara = `I am making the homepage / post system to keep a ledger of the things im working on, this post is specific is to see how the scroll it.
 I want to make everyother post to be in the reverse direction, I want to move all the paragraphs to a data file.
 This is the start of css monthlys, I'm only going to work on styles at the start of each month
+I need to fix the home page to allow dynamic sized components, next to do is a post adder
 `;
 
 export default function Homepage() {
@@ -24,7 +28,7 @@ export default function Homepage() {
       <Post name={"Post"} comp={""} para={postPara} />
       <Post
         name={"MineSweeper"}
-        comp={<Minesweeper height={250} width={250} />}
+        comp={<Minesweeper height={200} width={225} />}
         para={minePara}
       />
       <Post

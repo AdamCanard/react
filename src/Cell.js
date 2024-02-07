@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import flag from "./Flag.png";
+import styled from "styled-components";
 
 export default function Cell({
   obj,
@@ -15,19 +16,12 @@ export default function Cell({
     display: "flex",
     placeContent: "center",
     textAlign: "center",
-    height: height + "px",
-    width: width + "px",
+    height: height - 3 + "px",
+    width: width - 3 + "px",
     flexWrap: "wrap",
-
     fontFamily: "Lucida Console",
     fontSize: height / 2.5 + "px",
     userSelect: "none",
-    backgroundColor:
-      obj.objState === "closed" || obj.objState === "flagged"
-        ? "grey"
-        : obj.objState === "highlight"
-        ? "silver"
-        : "lightgrey",
   };
 
   function clickBox(e) {
@@ -51,19 +45,41 @@ export default function Cell({
     }
   }
 
-  return (
-    <div onClick={clickBox} onContextMenu={clickBox} style={boxStyle}>
-      {obj.objState === "show" && obj.objState != "flagged"
-        ? obj.objVal === 9
-          ? ""
-          : obj.objVal
-        : ""}
+  const CellWrap = styled.section`
+    background-color: ${obj.objState === "closed" || obj.objState === "flagged"
+      ? "#c6c6c6"
+      : obj.objState === "highlight"
+      ? "white"
+      : "silver"};
+    border-left: ${obj.objState === "closed" || obj.objState === "flagged"
+      ? "3px solid #ffffff"
+      : "1px solid #848484"};
+    border-top: ${obj.objState === "closed" || obj.objState === "flagged"
+      ? "3px solid #ffffff"
+      : "1px solid #848484"};
+    border-right: ${obj.objState === "closed" || obj.objState === "flagged"
+      ? "3px solid #808080"
+      : "1px solid #848484"};
+    border-bottom: ${obj.objState === "closed" || obj.objState === "flagged"
+      ? "3px solid #808080"
+      : "1px solid #848484"};
+  `;
 
-      {obj.objState === "flagged" ? (
-        <img src={flag} alt="flag" style={boxStyle}></img>
-      ) : (
-        ""
-      )}
-    </div>
+  return (
+    <CellWrap>
+      <div onClick={clickBox} onContextMenu={clickBox} style={boxStyle}>
+        {obj.objState === "show" && obj.objState != "flagged"
+          ? obj.objVal === 9
+            ? ""
+            : obj.objVal
+          : ""}
+
+        {obj.objState === "flagged" ? (
+          <img src={flag} alt="flag" style={boxStyle}></img>
+        ) : (
+          ""
+        )}
+      </div>
+    </CellWrap>
   );
 }
