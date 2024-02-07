@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Cell from "./Cell.js";
+import SmileyFace from "./Smiley.png";
+import styled from "styled-components";
 
 export default function Board({ maxRow, maxCol, bombs, height, width }) {
   const boardGen = () => {
@@ -425,6 +427,33 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
     border: "2px solid black",
   };
 
+  const GridCSSWrap = styled.section`
+    display: grid;
+    height: ${height}px;
+    width: ${width}px;
+    align-items: center;
+    grid-template-columns: repeat(${maxCol}, ${width / maxCol}px);
+    grid-template-rows: repeat(${maxRow}, ${height / maxRow}px);
+    border-left: 4px solid #848484;
+    border-top: 4px solid #848484;
+    border-right: 4px solid #ffffff;
+    border-bottom: 4px solid #ffffff;
+  `;
+
+  const BackBoardWrap = styled.section`
+    display: flex;
+    height: ${height * 1.2}px;
+    width: ${width + 20}px;
+    padding-bottom: 4px;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: #c6c6c6;
+    border-left: 4px solid #ffffff;
+    border-top: 4px solid #ffffff;
+    border-right: 4px solid #808080;
+    border-bottom: 4px solid #808080;
+  `;
+
   return (
     <div
       onContextMenu={(e) => e.preventDefault()}
@@ -434,25 +463,57 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
         justifyContent: "center",
       }}
     >
-      <div style={gridStyle}>
-        {Object.values(grid).map((row, index) => {
-          return Object.values(row).map((cell, col) => {
-            return (
-              <Cell
-                obj={cell}
-                height={height / maxRow}
-                width={width / maxCol}
-                openAllZero={openAllZero}
-                flagSquare={flagSquare}
-                openBox={openBox}
-                boardReset={boardReset}
-                clearOrHighlight={clearOrHighlight}
-                key={"row:" + index + " col:" + col}
-              />
-            );
-          });
-        })}
-      </div>
+      <BackBoardWrap>
+        <BackBoard>
+          <Timer />
+          <Smile />
+          <GridCSSWrap>
+            {Object.values(grid).map((row, index) => {
+              return Object.values(row).map((cell, col) => {
+                return (
+                  <Cell
+                    obj={cell}
+                    height={height / maxRow}
+                    width={width / maxCol}
+                    openAllZero={openAllZero}
+                    flagSquare={flagSquare}
+                    openBox={openBox}
+                    boardReset={boardReset}
+                    clearOrHighlight={clearOrHighlight}
+                    key={"row:" + index + " col:" + col}
+                  />
+                );
+              });
+            })}
+          </GridCSSWrap>
+        </BackBoard>
+      </BackBoardWrap>
     </div>
+  );
+}
+
+function BackBoard({ children }) {
+  return (
+    <>
+      <div className="BackBoard">{children}</div>
+    </>
+  );
+}
+
+function Timer() {
+  return <></>;
+}
+
+function Smile() {
+  const SmileyWrap = styled.image`
+    display: flex;
+    height: 30px;
+    width: 30px;
+  `;
+
+  return (
+    <SmileyWrap>
+      <img src={SmileyFace} />
+    </SmileyWrap>
   );
 }

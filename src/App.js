@@ -29,7 +29,7 @@ export default App;
 
 function Screen() {
   const [gamer, setGamer] = useState(false);
-  const [current, setCurrent] = useState("homepage");
+  const [current, setCurrent] = useState("minesweeper");
 
   const screenStyle = {
     display: "flex",

@@ -18,7 +18,7 @@ export default function Cell({
     height: height + "px",
     width: width + "px",
     flexWrap: "wrap",
-    border: "black 1px solid",
+
     fontFamily: "Lucida Console",
     fontSize: height / 2.5 + "px",
     userSelect: "none",
