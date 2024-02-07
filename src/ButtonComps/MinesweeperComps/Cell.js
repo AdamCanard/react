@@ -50,7 +50,7 @@ export default function Cell({
       ? "#c6c6c6"
       : obj.objState === "highlight"
       ? "white"
-      : "silver"};
+      : "#b9b9b9"};
     border-left: ${obj.objState === "closed" || obj.objState === "flagged"
       ? "3px solid #ffffff"
       : "1px solid #848484"};

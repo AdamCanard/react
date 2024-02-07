@@ -18,6 +18,7 @@ I want to make everyother post to be in the reverse direction, I want to move al
 This is the start of css monthlys, I'm only going to work on styles at the start of each month
 I need to fix the home page to allow dynamic sized components, next to do is a post adder
 `;
+
 let paraList = {
   Post: postPara,
   Minesweeper: minePara,
