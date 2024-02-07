@@ -1,5 +1,4 @@
-import Board from "./Board";
-import styled, { css } from "styled-components";
+import Board from "./MinesweeperComps/Board";
 
 export default function Minesweeper({ height = 250, width = 250 }) {
   return (

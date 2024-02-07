@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import flag from "./Flag.png";
+import flag from "./MinesweeperImages/Flag.png";
 import styled from "styled-components";
 
 export default function Cell({

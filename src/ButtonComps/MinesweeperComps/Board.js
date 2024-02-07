@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import Cell from "./Cell.js";
-import SmileyFace from "./Smiley.png";
+import SmileyFace from "./MinesweeperImages/Smiley.png";
 import styled from "styled-components";
 
 export default function Board({ maxRow, maxCol, bombs, height, width }) {
@@ -516,6 +516,7 @@ function TopRow({ width }) {
         </SevenSegWrap>
 
         <Smile />
+
         <SevenSegWrap>
           <div className="Bombs"></div>
         </SevenSegWrap>
