@@ -5,7 +5,11 @@ import Postdata from "./PostData";
 export default function Homepage() {
   return (
     <>
-      <Post name={"Post"} comp={""} para={Postdata.Post} />
+      {Object.entries(Postdata).map((obj) => {
+        console.log(obj);
+        return <Post name={obj[0]} comp={""} para={obj[1]} />;
+      })}
+      {/* <Post name={"Post"} comp={""} para={Postdata.Post} />
       <Post
         name={"MineSweeper"}
         comp={<Minesweeper height={200} width={225} />}
@@ -15,7 +19,7 @@ export default function Homepage() {
         name={"Clock"}
         comp={<Clock height={250} width={250} />}
         para={Postdata.Clock}
-      />
+      /> */}
     </>
   );
 }
