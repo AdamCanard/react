@@ -27,7 +27,6 @@ export default function Cell({
 
   const boxStyle = {
     display: "flex",
-    placeContent: "center",
     textAlign: "center",
     justifyContent: "flex-start",
     height: height + "px",
@@ -35,6 +34,15 @@ export default function Cell({
     flexWrap: "wrap",
     fontFamily: "Lucida Console",
     fontSize: height / 2.5 + "px",
+    userSelect: "none",
+  };
+
+  const flagStyle = {
+    display: "flex",
+
+    height: height - 6 + "px",
+    width: width - 3 + "px",
+
     userSelect: "none",
   };
 
@@ -80,7 +88,7 @@ export default function Cell({
         )}
 
         {obj.objState === "flagged" ? (
-          <img src={flag} alt="flag" style={boxStyle}></img>
+          <img src={flag} alt="flag" style={flagStyle}></img>
         ) : (
           ""
         )}
