@@ -514,7 +514,7 @@ function TopRow({ width }) {
     <>
       <TopRowWrap $width={width}>
         <SevenSegWrap>
-          <div className="Timer"></div>
+          <Timer />
         </SevenSegWrap>
 
         <Smile />
@@ -525,6 +525,10 @@ function TopRow({ width }) {
       </TopRowWrap>
     </>
   );
+}
+
+function Timer() {
+  return <></>;
 }
 
 const SmileyWrap = styled.section`
