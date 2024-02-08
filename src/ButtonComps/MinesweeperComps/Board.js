@@ -417,49 +417,16 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
     }
   }, [grid]);
 
-  const gridStyle = {
-    display: "grid",
-    height: height + "px",
-    width: width + "px",
-    alignItems: "center",
-    gridTemplateColumns: "repeat(" + maxCol + ", " + width / maxCol + "px)",
-    gridTemplateRows: "repeat(" + maxRow + ", " + height / maxRow + "px)",
-    border: "2px solid black",
-  };
-
-  const GridCSSWrap = styled.section`
-    display: grid;
-    height: ${height}px;
-    width: ${width}px;
-    grid-template-columns: repeat(${maxCol}, ${width / maxCol}px);
-    grid-template-rows: repeat(${maxRow}, ${height / maxRow}px);
-    border-left: 4px solid #848484;
-    border-top: 4px solid #848484;
-    border-right: 4px solid #ffffff;
-    border-bottom: 4px solid #ffffff;
-  `;
-
-  const BackBoardWrap = styled.section`
-    display: flex;
-    flex-direction: column;
-    height: ${height + 80}px;
-    width: ${width + 20}px;
-    justify-content: flex-end;
-    align-items: center;
-    padding-bottom: 6px;
-    background-color: #c6c6c6;
-    border-left: 4px solid #ffffff;
-    border-top: 4px solid #ffffff;
-    border-right: 4px solid #808080;
-    border-bottom: 4px solid #808080;
-    row-gap: 8px;
-  `;
-
   return (
     <div onContextMenu={(e) => e.preventDefault()}>
-      <BackBoardWrap>
+      <BackBoardWrap height={height} width={width}>
         <TopRow width={width} />
-        <GridCSSWrap>
+        <GridCSSWrap
+          $height={height}
+          $width={width}
+          $maxcol={maxCol}
+          $maxrow={maxRow}
+        >
           {Object.values(grid).map((row, index) => {
             return Object.values(row).map((cell, col) => {
               return (
@@ -483,34 +450,69 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
   );
 }
 
-function TopRow({ width }) {
-  const TopRowWrap = styled.section`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: ${width}px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    justify-content: space-around;
-    background-color: #c0c0c0;
-    border-left: 4px solid #808080;
-    border-top: 4px solid #808080;
-    border-right: 4px solid #ffffff;
-    border-bottom: 4px solid #ffffff;
-  `;
+const BackBoardWrap = styled.section`
+  display: flex;
+  flex-direction: column;
+  height: ${(props) => props.$height + 80}px;
+  width: ${(props) => props.$width + 20}px;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 6px;
+  background-color: #c6c6c6;
+  border-left: 4px solid #ffffff;
+  border-top: 4px solid #ffffff;
+  border-right: 4px solid #808080;
+  border-bottom: 4px solid #808080;
+  row-gap: 8px;
+`;
 
-  const SevenSegWrap = styled.section`
-    height: 30px;
-    width: 60px;
-    background-color: black;
-    border-left: 2px solid #848484;
-    border-top: 2px solid #848484;
-    border-right: 2px solid #ffffff;
-    border-bottom: 2px solid #ffffff;
-  `;
+const GridCSSWrap = styled.section`
+  display: grid;
+  height: ${(props) => props.$height}px;
+  width: ${(props) => props.$width}px;
+  grid-template-columns: repeat(
+    ${(props) => props.$maxcol},
+    ${(props) => props.$width / props.$maxcol}px
+  );
+  grid-template-rows: repeat(
+    ${(props) => props.$maxrow},
+    ${(props) => props.$height / props.$maxrow}px
+  );
+  border-left: 4px solid #848484;
+  border-top: 4px solid #848484;
+  border-right: 4px solid #ffffff;
+  border-bottom: 4px solid #ffffff;
+`;
+
+const TopRowWrap = styled.section`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: ${(props) => props.$width}px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  justify-content: space-around;
+  background-color: #c0c0c0;
+  border-left: 4px solid #808080;
+  border-top: 4px solid #808080;
+  border-right: 4px solid #ffffff;
+  border-bottom: 4px solid #ffffff;
+`;
+
+const SevenSegWrap = styled.section`
+  height: 30px;
+  width: 60px;
+  background-color: black;
+  border-left: 2px solid #848484;
+  border-top: 2px solid #848484;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+`;
+
+function TopRow({ width }) {
   return (
     <>
-      <TopRowWrap>
+      <TopRowWrap $width={width}>
         <SevenSegWrap>
           <div className="Timer"></div>
         </SevenSegWrap>
@@ -525,18 +527,18 @@ function TopRow({ width }) {
   );
 }
 
-function Smile() {
-  const SmileyWrap = styled.section`
-    display: flex;
-    height: 30px;
-    width: 30px;
-    justify-self: center;
-    border-left: 2px solid #ffffff;
-    border-top: 2px solid #ffffff;
-    border-right: 2px solid #848484;
-    border-bottom: 2px solid #848484;
-  `;
+const SmileyWrap = styled.section`
+  display: flex;
+  height: 30px;
+  width: 30px;
+  justify-self: center;
+  border-left: 2px solid #ffffff;
+  border-top: 2px solid #ffffff;
+  border-right: 2px solid #848484;
+  border-bottom: 2px solid #848484;
+`;
 
+function Smile() {
   return (
     <SmileyWrap>
       <img src={SmileyFace} />

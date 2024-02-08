@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import flag from "./MinesweeperImages/Flag.png";
 import styled from "styled-components";
+import imgList from "./MineNum";
 
 export default function Cell({
   obj,
@@ -12,12 +13,25 @@ export default function Cell({
   boardReset,
   clearOrHighlight,
 }) {
+  const numStyle = {
+    display: "flex",
+    placeContent: "center",
+    textAlign: "center",
+    height: height + "px",
+    width: width + "px",
+    flexWrap: "wrap",
+    fontFamily: "Lucida Console",
+    fontSize: height / 2.5 + "px",
+    userSelect: "none",
+  };
+
   const boxStyle = {
     display: "flex",
     placeContent: "center",
     textAlign: "center",
-    height: height - 3 + "px",
-    width: width - 3 + "px",
+    justifyContent: "flex-start",
+    height: height + "px",
+    width: width + "px",
     flexWrap: "wrap",
     fontFamily: "Lucida Console",
     fontSize: height / 2.5 + "px",
@@ -44,35 +58,26 @@ export default function Cell({
       }
     }
   }
-
-  const CellWrap = styled.section`
-    background-color: ${obj.objState === "closed" || obj.objState === "flagged"
-      ? "#c6c6c6"
-      : obj.objState === "highlight"
-      ? "white"
-      : "#b9b9b9"};
-    border-left: ${obj.objState === "closed" || obj.objState === "flagged"
-      ? "3px solid #ffffff"
-      : "1px solid #848484"};
-    border-top: ${obj.objState === "closed" || obj.objState === "flagged"
-      ? "3px solid #ffffff"
-      : "1px solid #848484"};
-    border-right: ${obj.objState === "closed" || obj.objState === "flagged"
-      ? "3px solid #808080"
-      : "1px solid #848484"};
-    border-bottom: ${obj.objState === "closed" || obj.objState === "flagged"
-      ? "3px solid #808080"
-      : "1px solid #848484"};
-  `;
-
   return (
-    <CellWrap>
+    <CellWrap $objState={obj.objState}>
       <div onClick={clickBox} onContextMenu={clickBox} style={boxStyle}>
-        {obj.objState === "show" && obj.objState != "flagged"
-          ? obj.objVal === 9
-            ? ""
-            : obj.objVal
-          : ""}
+        {obj.objState === "show" ? (
+          obj.objVal === 9 ? (
+            <img
+              src={imgList[obj.objVal - 1]}
+              alt="numImg"
+              style={numStyle}
+            ></img>
+          ) : (
+            <img
+              src={imgList[obj.objVal - 1]}
+              alt="numImg"
+              style={numStyle}
+            ></img>
+          )
+        ) : (
+          ""
+        )}
 
         {obj.objState === "flagged" ? (
           <img src={flag} alt="flag" style={boxStyle}></img>
@@ -83,3 +88,28 @@ export default function Cell({
     </CellWrap>
   );
 }
+
+const CellWrap = styled.section`
+  background-color: ${(props) =>
+    props.$objState === "closed" || props.$objState === "flagged"
+      ? "#c6c6c6"
+      : props.obj === "highlight"
+      ? "white"
+      : "#b9b9b9"};
+  border-left: ${(props) =>
+    props.$objState === "closed" || props.$objState === "flagged"
+      ? "3px solid #ffffff"
+      : "1px solid #848484"};
+  border-top: ${(props) =>
+    props.$objState === "closed" || props.$objState === "flagged"
+      ? "3px solid #ffffff"
+      : "1px solid #848484"};
+  border-right: ${(props) =>
+    props.$objState === "closed" || props.$objState === "flagged"
+      ? "3px solid #808080"
+      : "1px solid #848484"};
+  border-bottom: ${(props) =>
+    props.$objState === "closed" || props.$objState === "flagged"
+      ? "3px solid #808080"
+      : "1px solid #848484"};
+`;
