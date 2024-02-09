@@ -419,11 +419,11 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
 
   return (
     <div onContextMenu={(e) => e.preventDefault()}>
-      <BackBoardWrap height={height} width={width}>
+      <BackBoardWrap>
         <TopRow width={width} />
         <GridCSSWrap
-          $height={height}
-          $width={width}
+          $height={height + 5}
+          $width={width + 5}
           $maxcol={maxCol}
           $maxrow={maxRow}
         >
@@ -453,8 +453,6 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
 const BackBoardWrap = styled.section`
   display: flex;
   flex-direction: column;
-  height: ${(props) => props.$height + 80}px;
-  width: ${(props) => props.$width + 20}px;
   justify-content: flex-end;
   align-items: center;
   padding-bottom: 6px;
@@ -491,7 +489,9 @@ const TopRowWrap = styled.section`
   width: ${(props) => props.$width}px;
   padding-top: 8px;
   padding-bottom: 8px;
-  justify-content: space-around;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: space-between;
   background-color: #c0c0c0;
   border-left: 4px solid #808080;
   border-top: 4px solid #808080;
