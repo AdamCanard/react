@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import Cell from "./Cell.js";
 import SmileyFace from "./MinesweeperImages/Smiley.png";
+import Timer from "./Timer.js";
 import styled from "styled-components";
 
 export default function Board({ maxRow, maxCol, bombs, height, width }) {
@@ -525,10 +526,6 @@ function TopRow({ width }) {
       </TopRowWrap>
     </>
   );
-}
-
-function Timer() {
-  return <></>;
 }
 
 const SmileyWrap = styled.section`

@@ -8,7 +8,7 @@ import Minesweeper7 from "./MinesweeperImages/Minesweeper_7.png";
 import Minesweeper8 from "./MinesweeperImages/Minesweeper_8.png";
 import Minesweeper0 from "./MinesweeperImages/Minesweeper_0.png";
 
-const imgList = [
+const cellImageList = [
   Minesweeper1,
   Minesweeper2,
   Minesweeper3,
@@ -20,4 +20,4 @@ const imgList = [
   Minesweeper0,
 ];
 
-export default imgList;
+export default cellImageList;

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import flag from "./MinesweeperImages/Flag.png";
 import styled from "styled-components";
-import imgList from "./MineNum";
+import cellImageList from "./MineNum";
 
 export default function Cell({
   obj,
@@ -72,13 +72,13 @@ export default function Cell({
         {obj.objState === "show" ? (
           obj.objVal === 9 ? (
             <img
-              src={imgList[obj.objVal - 1]}
+              src={cellImageList[obj.objVal - 1]}
               alt="numImg"
               style={numStyle}
             ></img>
           ) : (
             <img
-              src={imgList[obj.objVal - 1]}
+              src={cellImageList[obj.objVal - 1]}
               alt="numImg"
               style={numStyle}
             ></img>

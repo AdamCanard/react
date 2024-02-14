@@ -31,6 +31,7 @@ export default function Minesweeper({ difficulty = "easy" }) {
       bombs={bombs}
       height={height}
       width={width}
+      difficulty={difficulty}
     />
   );
 }
