@@ -10,7 +10,7 @@ import Minesweeper from "./ButtonComps/Minesweeper";
 
 export default function Screen() {
   const [gamer, setGamer] = useState(false);
-  const [current, setCurrent] = useState("homepage");
+  const [current, setCurrent] = useState("dev");
 
   const screenStyle = {
     display: "flex",
