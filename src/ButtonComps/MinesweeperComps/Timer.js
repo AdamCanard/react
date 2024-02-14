@@ -24,6 +24,14 @@ export default function Timer() {
     secondsPassed = (nowTime - startTime) / 1000;
   }
 
+  function handleClick() {
+    setStartTime(Date.now());
+    clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setNowTime(Date.now());
+    }, 1000);
+  }
+
   return (
     <>
       <img
@@ -38,6 +46,7 @@ export default function Timer() {
         src={timerImageList[Math.floor(secondsPassed % 10)]}
         style={{ height: "100%", backgroundColor: "white" }}
       ></img>
+      <button onClick={handleClick}></button>
     </>
   );
 }
