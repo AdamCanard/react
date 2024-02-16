@@ -122,6 +122,7 @@ function Record({ inputPos, spikePos, trigger }) {
 
   function handlePointerUp(e) {
     setLastCoordinates(null);
+    console.log(e);
     //snap box on drop to whole pixel
     setPosition({
       ...position,

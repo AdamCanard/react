@@ -1,8 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, createContext, useContext } from "react";
 import Cell from "./Cell.js";
 import SmileyFace from "./MinesweeperImages/Smiley.png";
 import Timer from "./Timer.js";
 import styled from "styled-components";
+import FlagCounter from "./FlagCounter.js";
+
+export const ValContext = createContext(null);
 
 export default function Board({ maxRow, maxCol, bombs, height, width }) {
   const boardGen = () => {
@@ -91,6 +94,7 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
 
   const [grid, setGrid] = useState(boardGen);
   const [highlight, setHighlight] = useState(false);
+  const [numFlags, setNumFlags] = useState(0);
   const [lose, setLose] = useState(false);
 
   function openAllZero(row, col) {
@@ -211,6 +215,7 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
         }
       }
     }
+    setNumFlags(flagCount);
     if (flagCount === bombs && correctFlags === flagCount) {
       return true;
     } else {
@@ -420,33 +425,35 @@ export default function Board({ maxRow, maxCol, bombs, height, width }) {
 
   return (
     <div onContextMenu={(e) => e.preventDefault()}>
-      <BackBoardWrap>
-        <TopRow width={width} />
-        <GridCSSWrap
-          $height={height + 5}
-          $width={width + 5}
-          $maxcol={maxCol}
-          $maxrow={maxRow}
-        >
-          {Object.values(grid).map((row, index) => {
-            return Object.values(row).map((cell, col) => {
-              return (
-                <Cell
-                  obj={cell}
-                  height={height / maxRow}
-                  width={width / maxCol}
-                  openAllZero={openAllZero}
-                  flagSquare={flagSquare}
-                  openBox={openBox}
-                  boardReset={boardReset}
-                  clearOrHighlight={clearOrHighlight}
-                  key={"row:" + index + " col:" + col}
-                />
-              );
-            });
-          })}
-        </GridCSSWrap>
-      </BackBoardWrap>
+      <ValContext.Provider value={{ bombs, numFlags }}>
+        <BackBoardWrap>
+          <TopRow width={width} />
+          <GridCSSWrap
+            $height={height + 5}
+            $width={width + 5}
+            $maxcol={maxCol}
+            $maxrow={maxRow}
+          >
+            {Object.values(grid).map((row, index) => {
+              return Object.values(row).map((cell, col) => {
+                return (
+                  <Cell
+                    obj={cell}
+                    height={height / maxRow}
+                    width={width / maxCol}
+                    openAllZero={openAllZero}
+                    flagSquare={flagSquare}
+                    openBox={openBox}
+                    boardReset={boardReset}
+                    clearOrHighlight={clearOrHighlight}
+                    key={"row:" + index + " col:" + col}
+                  />
+                );
+              });
+            })}
+          </GridCSSWrap>
+        </BackBoardWrap>
+      </ValContext.Provider>
     </div>
   );
 }
@@ -515,13 +522,13 @@ function TopRow({ width }) {
     <>
       <TopRowWrap $width={width}>
         <SevenSegWrap>
-          <Timer />
+          <FlagCounter />
         </SevenSegWrap>
-
-        <Smile />
-
+        <SmileyWrap>
+          <img src={SmileyFace} />
+        </SmileyWrap>
         <SevenSegWrap>
-          <div className="Bombs"></div>
+          <Timer />
         </SevenSegWrap>
       </TopRowWrap>
     </>
@@ -538,11 +545,3 @@ const SmileyWrap = styled.section`
   border-right: 2px solid #848484;
   border-bottom: 2px solid #848484;
 `;
-
-function Smile() {
-  return (
-    <SmileyWrap>
-      <img src={SmileyFace} />
-    </SmileyWrap>
-  );
-}
