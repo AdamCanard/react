@@ -14,7 +14,7 @@ const AppWrap = styled.section`
 function App() {
   return (
     <AppWrap id="AppWrapper">
-      <Screen />
+      <Screen startingScreen={"dev"} />
     </AppWrap>
   );
 }

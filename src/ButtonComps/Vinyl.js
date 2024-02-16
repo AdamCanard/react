@@ -1,11 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-export default function Vinyl() {
+export default function Vinyl({ inputPos, inputColor, onDrop }) {
   const [shape, setShape] = useState({
-    color: "orange",
-    position: { x: 0, y: 0 },
+    position: { x: inputPos.x, y: inputPos.y, z: inputPos.z },
+    color: inputColor,
   });
+  const [lastCoordinates, setLastCoordinates] = useState(null);
 
   function handleMove(dx, dy) {
     setShape({
@@ -16,42 +17,20 @@ export default function Vinyl() {
         y: shape.position.y + dy,
       },
     });
-    shape.position.x += dx;
-    shape.position.y += dy;
   }
-
-  function handleColorChange(e) {
-    setShape({
-      ...shape,
-      color: e.target.value,
-    });
-  }
-
-  return (
-    <>
-      <select value={shape.color} onChange={handleColorChange}>
-        <option value="orange">orange</option>
-        <option value="lightpink">lightpink</option>
-        <option value="aliceblue">aliceblue</option>
-      </select>
-
-      <Record
-        name="temp"
-        position={shape.position}
-        onMove={handleMove}
-      ></Record>
-    </>
-  );
-}
-
-function Record({ name, position, onMove }) {
-  const [lastCoordinates, setLastCoordinates] = useState(null);
 
   function handlePointerDown(e) {
     e.target.setPointerCapture(e.pointerId);
     setLastCoordinates({
       x: e.clientX,
       y: e.clientY,
+    });
+    setShape({
+      ...shape,
+      position: {
+        ...shape.position,
+        z: shape.position.z + 1,
+      },
     });
   }
 
@@ -63,52 +42,52 @@ function Record({ name, position, onMove }) {
       });
       const dx = e.clientX - lastCoordinates.x;
       const dy = e.clientY - lastCoordinates.y;
-      onMove(dx, dy);
+      handleMove(dx, dy);
     }
   }
 
   function handlePointerUp(e) {
     setLastCoordinates(null);
+    //snap box on drop to whole pixel
+    setShape({
+      ...shape,
+      position: {
+        ...shape.position,
+        x: Math.floor(shape.position.x),
+        y: Math.floor(shape.position.y),
+        z: shape.position.z - 1,
+      },
+    });
+    onDrop(Math.floor(shape.position.x), Math.floor(shape.position.y));
   }
 
   return (
-    // <ImageWrapper x={position.x} y={position.y} $backimg={temp}>
-    <div
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      // src={image}
-      alt={name}
-      style={{
-        width: 100,
-        height: 100,
-        cursor: "grab",
-        backgroundImage: 'url("https://imgur.com/iCKKb0E")',
-        position: "absolute",
-        border: "1px solid black",
-        userDrag: "none",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        transform: `translate(
-          ${position.x}px,
-          ${position.y}px
+    <>
+      <div
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        style={{
+          width: 100,
+          height: 100,
+          cursor: "grab",
+          backgroundColor: shape.color,
+          position: "absolute",
+          border: "1px solid black",
+          userSelect: "none",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: shape.position.z,
+          transform: `translate(
+          ${shape.position.x}px,
+          ${shape.position.y}px
         )`,
-      }}
-    />
+        }}
+      >
+        {shape.position.x} {"\n"}
+        {shape.position.y}
+      </div>
+    </>
   );
 }
-
-const ImageWrapper = styled.section`
-  width: 100px;
-  height: 100px;
-  cursor: grab;
-  position: absolute;
-  border: 1px black solid;
-  //background-image: url("../Temp.png");
-  background-color: green;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform: translate(${(props) => props.x}px, ${(props) => props.y});
-`;

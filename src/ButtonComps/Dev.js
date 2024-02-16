@@ -1,19 +1,18 @@
 import { useState, useEffect, useCallback, useReducer } from "react";
 import Minesweeper from "./Minesweeper";
 import styled from "styled-components";
-import Vinyl from "./Vinyl";
+import Room from "./Room";
 
 export default function Dev() {
   return (
     // <Gameloop />
     //<Minesweeper />
+    // <Box />
     <>
-      <Box />
+      <Room />
     </>
   );
 }
-
-const initialState = { name: "Taylor", age: 42 };
 
 function Box() {
   // const [state, dispatch] = useReducer(reducer, initialState);

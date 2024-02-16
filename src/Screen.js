@@ -8,9 +8,9 @@ import Homepage from "./ButtonComps/Homepage";
 import Dev from "./ButtonComps/Dev";
 import Minesweeper from "./ButtonComps/Minesweeper";
 
-export default function Screen() {
+export default function Screen({ startingScreen }) {
   const [gamer, setGamer] = useState(false);
-  const [current, setCurrent] = useState("minesweeper");
+  const [current, setCurrent] = useState(startingScreen);
 
   const screenStyle = {
     display: "flex",
