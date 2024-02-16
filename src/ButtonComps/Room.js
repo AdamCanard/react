@@ -1,9 +1,10 @@
 import Vinyl from "./Vinyl";
 import RecordPlayer from "./RecordPlayer";
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, createContext, useContext } from "react";
 
 export default function Room() {
+  const [zoomTrigger, setZoomTrigger] = useState(false);
   const recordPlayerPos = {
     x: 0,
     y: 0,
@@ -11,7 +12,7 @@ export default function Room() {
   };
 
   function checkPlacement(recordX, recordY) {
-    console.log(recordX, recordY);
+    //console.log(recordX, recordY);
     if (recordX === recordPlayerPos.x && recordY === recordPlayerPos.y) {
       alert("Placed");
     } else if (
@@ -20,7 +21,7 @@ export default function Room() {
       recordY >= recordPlayerPos.y - 10 &&
       recordY <= recordPlayerPos.y + 10
     ) {
-      console.log("close");
+      setZoomTrigger(true);
     }
   }
 
@@ -45,17 +46,24 @@ export default function Room() {
         );
       })}
       <RecordPlayer inputPos={{ recordPlayerPos }} />
-      <Zoom />
+      {zoomTrigger ? <Zoom trigger={setZoomTrigger} /> : <></>}
     </>
   );
 }
 
-function Zoom() {
+function Zoom({ trigger }) {
+  const SpikeContext = createContext(null);
+  const [spikePos, setSpikePos] = useState({ x: 0, y: 140, z: 11 });
+  const [zoomRecordPos, setzoomRecordPos] = useState({ x: 0, y: 0, z: 10 });
   return (
     <ZoomScreenWrap>
       <>
-        <Record inputPos={{ x: 0, y: 0, z: 10 }} />
-        <Spike />
+        <Record
+          inputPos={zoomRecordPos}
+          spikePos={spikePos}
+          trigger={trigger}
+        />
+        <Spike spikePos={spikePos} />
       </>
     </ZoomScreenWrap>
   );
@@ -73,11 +81,12 @@ const ZoomScreenWrap = styled.div`
   transform: translate(${0}px, ${150}px);
 `;
 
-function Record(inputPos) {
+function Record({ inputPos, spikePos, trigger }) {
+  console.log(spikePos);
   const [position, setPosition] = useState({
-    x: inputPos.inputPos.x,
-    y: inputPos.inputPos.y,
-    z: inputPos.inputPos.z,
+    x: inputPos.x,
+    y: inputPos.y,
+    z: inputPos.z,
   });
 
   const [lastCoordinates, setLastCoordinates] = useState(null);
@@ -119,6 +128,13 @@ function Record(inputPos) {
       x: Math.floor(position.x),
       y: Math.floor(position.y),
     });
+    console.log(Math.floor(position.x), spikePos.x);
+    if (
+      spikePos.x === Math.floor(position.x) &&
+      spikePos.y <= Math.floor(position.y)
+    ) {
+      trigger(false);
+    }
   }
   return (
     <div
@@ -147,7 +163,7 @@ function Record(inputPos) {
   );
 }
 
-function Spike() {
+function Spike({ spikePos }) {
   return (
     <div
       style={{
@@ -156,7 +172,10 @@ function Spike() {
         height: "60px",
         zIndex: 11,
         backgroundColor: "blue",
-        alignSelf: "end",
+        transform: `translate(
+          ${spikePos.x}px,
+          ${spikePos.y}px
+        )`,
       }}
     ></div>
   );
