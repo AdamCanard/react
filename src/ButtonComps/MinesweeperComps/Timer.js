@@ -46,7 +46,6 @@ export default function Timer() {
         src={timerImageList[Math.floor(secondsPassed % 10)]}
         style={{ height: "100%", backgroundColor: "white" }}
       ></img>
-      <button onClick={handleClick}></button>
     </>
   );
 }

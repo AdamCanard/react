@@ -92,11 +92,21 @@ function Record({ inputPos, spikePos, trigger }) {
   const [lastCoordinates, setLastCoordinates] = useState(null);
 
   function handleMove(dx, dy) {
-    setPosition({
-      ...position,
-      x: position.x + dx,
-      y: position.y + dy,
-    });
+    if (position.y + dy + 30 <= spikePos.y + 60) {
+      if (position.y + dy + 30 <= spikePos.y) {
+        setPosition({
+          ...position,
+          x: position.x + dx,
+          y: position.y + dy,
+        });
+      } else if (position.x >= spikePos.x - 3 && position.x <= spikePos.x + 3) {
+        setPosition({
+          ...position,
+          x: position.x + dx,
+          y: position.y + dy,
+        });
+      }
+    }
   }
 
   function handlePointerDown(e) {
@@ -129,9 +139,10 @@ function Record({ inputPos, spikePos, trigger }) {
       x: Math.floor(position.x),
       y: Math.floor(position.y),
     });
-    console.log(Math.floor(position.x), spikePos.x);
+
     if (
-      spikePos.x === Math.floor(position.x) &&
+      position.x >= spikePos.x - 5 &&
+      position.x <= spikePos.x + 5 &&
       spikePos.y <= Math.floor(position.y)
     ) {
       trigger(false);
