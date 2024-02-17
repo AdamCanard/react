@@ -54,6 +54,15 @@ export default function Clock({ height, width }) {
     whiteSpace: "nowrap",
     transition: secondAng === 0 ? "none" : "1s",
   };
+  const hourTextStyle = {
+    fontsize:"large",
+  }
+  const secondTextStyle = {
+    fontsize: "small",
+  }
+  const minuteTextStlye={
+    fontsize:"unset",
+  }
 
   function useTime() {
     const [time, setTime] = useState(() => new Date());
@@ -105,7 +114,13 @@ export default function Clock({ height, width }) {
             position: "absolute",
           }}
         ></div>
+
+        <div style={{border:"8px solid black",width:"0px",left:"48%",borderRadius:"8px",position:"absolute"}}></div>
+        <div style={hourStyle}><span style={hourTextStyle}>{hourStr}</span></div>
+        <div style={minuteStyle}><span style={minuteTextStlye}>{minuteStr}</span></div>
+        <div style={secondStyle}><span style={secondTextStyle}>{secondStr}</span></div>
       </div>
+      {/*<div>{secondAng -90}</div>*/}
     </div>
   );
 }
