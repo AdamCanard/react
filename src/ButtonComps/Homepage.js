@@ -1,5 +1,5 @@
 import Clock from "./Clock";
-import Minesweeper from "./Minesweeper";
+import Minesweeper from "../routes/Minesweeper/Minesweeper";
 import Postdata from "./PostData";
 
 export default function Homepage() {

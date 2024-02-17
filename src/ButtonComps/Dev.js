@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useReducer } from "react";
-import Minesweeper from "./Minesweeper";
+import Minesweeper from "../routes/Minesweeper/Minesweeper";
 import styled from "styled-components";
 import Room from "./Room";
 

@@ -6,7 +6,7 @@ import Taskbar from "./Taskbar";
 import Homepage from "./ButtonComps/Homepage";
 
 import Dev from "./ButtonComps/Dev";
-import Minesweeper from "./ButtonComps/Minesweeper";
+import Minesweeper from "./routes/Minesweeper/Minesweeper";
 
 export default function Screen({ startingScreen }) {
   const [gamer, setGamer] = useState(false);

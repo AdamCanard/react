@@ -1,5 +1,6 @@
 import { useState } from "react";
 import logo from "./Computer-icon.png";
+import { Link } from "react-router-dom";
 
 export default function Taskbar({
   homePage,
@@ -115,9 +116,9 @@ function ButtonGroup({
       <button onClick={button2} style={buttonStyle}>
         Clock
       </button>
-      <button onClick={button3} style={buttonStyle}>
+      <Link to={`minesweeper/`} style={buttonStyle}>
         MineSweeper
-      </button>
+      </Link>
       <button onClick={button4} style={buttonStyle}>
         Dev
       </button>
