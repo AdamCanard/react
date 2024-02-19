@@ -1,4 +1,4 @@
-import Board from "./MinesweeperComps/Board";
+import Board from "./MinesweeperComps/Board.js";
 
 export default function Minesweeper({ difficulty = "easy" }) {
   let rows, cols, bombs, height, width;

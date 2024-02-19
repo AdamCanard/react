@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useReducer } from "react";
-import Minesweeper from "./Minesweeper";
+import Minesweeper from "./Minesweeper.js";
 import styled from "styled-components";
-import Room from "./Room";
+import Room from "./Room.js";
 
 export default function Dev() {
   return (

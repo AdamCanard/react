@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import flag from "./MinesweeperImages/Flag.png";
 import styled from "styled-components";
-import cellImageList from "./MineNum";
+import cellImageList from "./MineNum.js";
 
 export default function Cell({
   obj,

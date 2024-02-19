@@ -1,5 +1,5 @@
-import Clock from "./Clock";
-import Minesweeper from "./Minesweeper";
+import Clock from "./Clock.js";
+import Minesweeper from "./Minesweeper.js";
 
 const clockPara = `I made this clock to practice using hooks, specifically useState and useInterval. 
   I was inspired to make this clock from a mock-up I saw on instagram and i wanted to try and recreate it.

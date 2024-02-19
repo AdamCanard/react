@@ -1,5 +1,5 @@
-import Vinyl from "./Vinyl";
-import RecordPlayer from "./RecordPlayer";
+import Vinyl from "./Vinyl.js";
+import RecordPlayer from "./RecordPlayer.js";
 import styled from "styled-components";
 import { useState, createContext, useContext } from "react";
 

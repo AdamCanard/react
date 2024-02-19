@@ -7,6 +7,7 @@ import Homepage from "./ButtonComps/Homepage";
 
 import Dev from "./ButtonComps/Dev";
 import Minesweeper from "./ButtonComps/Minesweeper";
+import ElectronHelloWorld from "./ElectronComponents/ElectronHelloWorld";
 
 export default function Screen({ startingScreen }) {
   const [gamer, setGamer] = useState(false);
@@ -63,6 +64,7 @@ export default function Screen({ startingScreen }) {
 
   return (
     <div className="ScreenDiv" style={screenStyle}>
+      <ElectronHelloWorld/>
       <div className="midCol" style={gamer ? gamerMode : midCol}>
         <Taskbar
           homePage={compHomepage}

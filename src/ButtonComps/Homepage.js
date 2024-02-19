@@ -1,6 +1,6 @@
-import Clock from "./Clock";
-import Minesweeper from "./Minesweeper";
-import Postdata from "./PostData";
+import Clock from "./Clock.js";
+import Minesweeper from "./Minesweeper.js";
+import Postdata from "./PostData.js";
 
 export default function Homepage() {
   return (
@@ -20,6 +20,7 @@ export default function Homepage() {
         comp={<Clock height={250} width={250} />}
         para={Postdata.Clock}
       />
+        test
     </>
   );
 }
