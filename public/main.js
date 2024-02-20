@@ -1,4 +1,4 @@
-const { app, BrowserWindow,ipcMain,session ,shell} = require('electron')
+const { app, BrowserWindow,ipcMain} = require('electron')
 const isDev = require("electron-is-dev")
 const path = require("path");
 process.env['NODE_' + 'ENV'] = 'production'
@@ -14,7 +14,7 @@ function createWindow(){
     win.loadURL(
         isDev
             ? 'http://localhost:3001'
-            : `file://${path.join(__dirname, '../build/index.html')}`
+            : `file://${path.join(__dirname, './index.html')}`
     );
 
     win.maximize()

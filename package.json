@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "concurrently": "^8.2.1",
-    "electron": "^26.2.1",
+    "electron": "29.0.0-beta.8",
     "electron-builder": "^24.6.4",
     "babel-plugin-styled-components": "^2.1.4",
     "wait-on": "^7.0.1",

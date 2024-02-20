@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import Screen from "./Screen.js";
-
+import Screen from "./Screen.js"
 const AppWrap = styled.section`
   display: flex;
   width: 100%;
